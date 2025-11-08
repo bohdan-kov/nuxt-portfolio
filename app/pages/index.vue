@@ -1,37 +1,14 @@
 <template>
-  <div>
-    Hello from the main page
-  </div>
+  <article class="prose dark:prose-invert">
+    <ContentRenderer v-if="page" :value="page" />
+    <div v-else>Post not found</div>
+  </article>
 </template>
 
 <script setup>
-useSeoMeta({
-  title: 'Main Page',
-  description: 'This is main page',
-  ogTitle: 'Main page',
-  ogDescription: '[og:description]',
-  ogImage: '[og:image]',
-  ogUrl: '[og:url]',
-  twitterTitle: 'Main page',
-  twitterDescription: '[twitter:description]',
-  twitterImage: '[twitter:image]',
-  twitterCard: 'summary'
-})
+const route = useRoute();
 
-useHead({
-  htmlAttrs: {
-    lang: 'en'
-  },
-  link: [
-    {
-      rel: 'icon',
-      type: 'image/png',
-      href: '/favicon.png'
-    }
-  ]
-})
+const { data: page } = await useAsyncData(route.path, () => {
+  return queryCollection("content").path(route.path).first();
+});
 </script>
-
-<style lang="scss" scoped>
-
-</style>

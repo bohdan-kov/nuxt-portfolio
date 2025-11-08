@@ -9,7 +9,7 @@
         'prose dark:prose-invert max-w-none',
         'prose-pre:bg-white dark:prose-pre:bg-gray-800',
         'prose-pre:text-gray-700 dark:prose-pre:text-gray-300',
-        hasToc ? 'col-span-4' : 'col-span-6',
+        hasToc ? 'col-span-4 md:col-span-4' : 'col-span-6',
       ]"
     >
       <ContentRenderer :value="post">
@@ -19,7 +19,7 @@
       </ContentRenderer>
     </article>
 
-    <aside v-if="hasToc" class="col-span-2 not-prose sticky top-8 h-fit">
+    <aside v-if="hasToc" class="hidden md:col-span-2 md:block not-prose sticky top-8 h-fit">
       <div class="font-semibold mb-2">Table of Contents</div>
       <nav>
         <TocLinks :links="post.body.toc.links" :active-id="activeId" />
